@@ -9,20 +9,37 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Nunito:wght@300&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Orbitron&display=swap"rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Orbitron&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
     <main>
-        <section id="digital_clock"><strong id="digital_clock_strong">00:00:00</strong></section>
-        <section id="phone_clock">
-            <img src="imgs/celular_modelo.png" alt=""><strong id="phone_clock_strong">00:00</strong>
+        <section id="display_relogio" class="section_all">
+            <h1>Relogio Digital</h1>
+            <strong id="horario_relogio_strong" class="dados_relogio_numeros">00:00:00:00</strong>
+            <strong id="data_relogio_strong" class="dados_relogio_numeros dados_relogio_data">Qui 15/06/2023</strong>
+        </section>
+
+        <section id="display_cronometro" class="section_all">
+            <h1>Cronômetro</h1>
+            <strong id="horario_cronometro_strong" class="dados_relogio_numeros">00:00:000</strong>
+            <button class="botoes"><i class="fa-solid fa-play"></i></button>
+            <button class="botoes"><i class="fa-solid fa-forward-step"></i></i></i></button>
+            <button class="botoes"><i class="fa-solid fa-power-off"></i></button>
+        </section>
+
+        <section id="display_relogio" class="section_all">
+            <h1>Fuso Horário Mundial</h1>
+            <strong id="horario_relogio_strong" class="dados_relogio_numeros">00:00:00:00</strong>
+            <strong id="data_relogio_strong" class="dados_relogio_numeros dados_relogio_data">Qui 15/06/2023</strong>
+            <select>
+                <option value="br">Brasil</option>
+            </select>
         </section>
     </main>
-    <script src="clock.js"></script>
+    <script src="https://kit.fontawesome.com/0a75f244da.js" crossorigin="anonymous"></script>
+    <script src="relogio.js"></script>
 </body>
 
 </html>

@@ -1,86 +1,62 @@
 * {
     box-sizing: border-box;
-}
-
-body {
-    background-image: url(../imgs/background-mobile.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
-}
-
-#digital_clock {
-    width: 99%;
-    margin:  auto;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-
-#digital_clock_strong {
-    font-family: 'Orbitron', sans-serif;
-    color: white;
-    -webkit-stroke-color: #0b2af3cc;
-    text-decoration: none;
-    font-size: 17vw;
-    text-shadow: 1px 0 1px rgba(11, 42, 243, 0.8);
-}
-
-#phone_clock img {
-    width: 90%;
-    position: relative;
-}
-
-#phone_clock {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-}
-
-#phone_clock_strong {
     font-family: 'Barlow Condensed', sans-serif;
-    font-family: 'Nunito', sans-serif;
-    color: white;
+    font-family: 'Orbitron', sans-serif;
+      color: white;
+}
+
+body{
+    background-color: #000000;
+    -webkit-stroke-color: #fff;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.botoes {
+    display: inline-block;
+    margin: 0 auto; 
+    padding: 0.625em 1.25em;
+    background-color:transparent;
+    border: none;
+    text-align: center;
     text-decoration: none;
-    font-size: 10vw;
-    position: absolute;
-    top: 25%;
-    left: 65%;
-    transform: translate(-50%, -50%);
+    cursor: pointer;
+    border: 2px #950101 solid;
+    border-radius: 10%;
+    transition: all .3s ease-in;
+}
+.botoes:hover i, .botoes:hover {
+    border-color: white ;
+    color: white;
+}
+.fa-solid{
+    color: #950101;
+    font-size: 2em;
+    transition: all .3s ease-in;
 }
 
-@media (min-width: 400px) {
-
-    body{
-        background-image: url(../imgs/background-desktop.jpg);
-    }
-    #digital_clock_strong{
-        font-size: 4em;
-    }
-    #phone_clock{
-        width: 85%;
-    }
-    #phone_clock_strong{
-        font-size: 10vw;
-        position: absolute;
-    }
+.section_all{
+align-items: center;
+text-align: center;
+justify-content: center;
+margin: 2.5em auto;
+padding: 1em 0;
 
 }
-
-@media (min-width: 600px) {
-
-    body{
-        background-image: url(../imgs/background-desktop.jpg);
-    }
-    #digital_clock_strong{
-        font-size: 4em;
-    }
-    #phone_clock{
-        width: 35em;
-    }
-    #phone_clock_strong{
-        font-size: 500%;
-    }
-
+.dados_relogio_numeros{
+    color: #ff0000;
+    -webkit-stroke-color: #fff;
+    text-decoration: none;
+    font-size: 2.3em;
+    display: block;
+    padding-bottom: .3em
+}
+.dados_relogio_data{
+    font-size: 1em; 
+    color: #dd0000;
+}
+select{
+    width: 10em;
+    background-color: transparent;
 }
