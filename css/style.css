@@ -57,6 +57,7 @@ padding: 1em 0;
     color: #dd0000;
 }
 select{
-    width: 10em;
-    background-color: transparent;
+    width: 17em;
+    background-color: black;
+    font-size: 1em;
 }

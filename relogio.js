@@ -1,20 +1,30 @@
 var $horarioRelogioStrong = document.querySelector("#horario_relogio_strong")
 var $dataRelogioStrong = document.querySelector("#data_relogio_strong")
 
+var tempoAtual
+var horaAtual;
+var minutoAtual;
+var segundoAtual;
+
+var diaDaSemanaAtual
+var diaAtual;
+var mesAtual;
+var anoAtual;
+
 function mostraHorarioAtual() {
-    var horarioAtual = new Date();
-    var horaAtual = formatarValores(horarioAtual.getHours())
-    var minutoAtual = formatarValores(horarioAtual.getMinutes())
-    var segundoAtual = formatarValores(horarioAtual.getSeconds())
-    $horarioRelogioStrong.textContent = `${horaAtual}:${minutoAtual}:${segundoAtual}`
+    tempoAtual = new Date();
+    horaAtual = formatarValores(tempoAtual.getHours())
+    minutoAtual = formatarValores(tempoAtual.getMinutes())
+    segundoAtual = formatarValores(tempoAtual.getSeconds())
+    $horarioRelogioStrong.innerHTML = `${horaAtual}:${minutoAtual}:${segundoAtual}`
 }
 function mostraDataAtual() {
-    var dataAtual = new Date();
-    var diaDaSemanaAtual = formatarDiaDaSeamana(dataAtual.getDay())
-    var diaAtual = formatarValores(dataAtual.getDate())
-    var mesAtual = formatarValores(dataAtual.getMonth() + 1)
-    var anoAtual = formatarValores(dataAtual.getFullYear())
-    $dataRelogioStrong.textContent = `${diaDaSemanaAtual} - ${diaAtual}/${mesAtual}/${anoAtual}`
+    tempoAtual = new Date();
+    diaDaSemanaAtual = formatarDiaDaSeamana(tempoAtual.getDay())
+    diaAtual = formatarValores(tempoAtual.getDate())
+    mesAtual = formatarValores(tempoAtual.getMonth() + 1)
+    anoAtual = formatarValores(tempoAtual.getFullYear())
+    $dataRelogioStrong.innerHTML = `${diaDaSemanaAtual} - ${diaAtual}/${mesAtual}/${anoAtual}`
 }
 function formatarValores(value) {
     return value = value < 10 ? "0" + value : value
@@ -37,9 +47,42 @@ function formatarDiaDaSeamana(dia_da_semana) {
     }
 
 }
-mostraHorarioAtual()
-mostraDataAtual()
+
 setInterval(function () { mostraHorarioAtual() }, 1000)
 setInterval(function () { mostraDataAtual() }, 1000)
 
 
+var $horarioFusoStrong = document.querySelector("#horario_fuso_strong")
+var $dataFusoStrong = document.querySelector("#data_fuso_strong")
+var $select = document.querySelector("select")
+
+setInterval(function () { mostraFuso() }, 1000)
+
+function mostraFuso() {
+    tempoAtual = new Date();
+
+    horaAtual = formatarValores(tempoAtual.getUTCHours() + 0)
+    minutoAtual = formatarValores(tempoAtual.getMinutes())
+    segundoAtual = formatarValores(tempoAtual.getSeconds())
+
+
+    horaAtual = formatarValores(tempoAtual.getUTCHours() + parseInt($select.value))
+
+    if (horaAtual < 0) {
+        horaAtual += 24;
+        tempoAtual.setDate(tempoAtual.getDate() - 1);
+    } else if (horaAtual >= 24) {
+        horaAtual -= 24;
+        tempoAtual.setDate(tempoAtual.getDate() + 1);
+    }
+    minutoAtual = formatarValores(tempoAtual.getMinutes());
+    segundoAtual = formatarValores(tempoAtual.getSeconds());
+
+    diaDaSemanaAtual = formatarDiaDaSeamana(tempoAtual.getDay())
+    diaAtual = formatarValores(tempoAtual.getDate());
+    mesAtual = formatarValores(tempoAtual.getMonth() + 1);
+    anoAtual = formatarValores(tempoAtual.getFullYear());
+
+    $horarioFusoStrong.innerHTML = `${horaAtual}:${minutoAtual}:${segundoAtual}`;
+    $dataFusoStrong.innerHTML = `${diaDaSemanaAtual} - ${diaAtual}/${mesAtual}/${anoAtual}`;
+} 

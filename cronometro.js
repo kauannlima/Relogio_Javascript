@@ -13,15 +13,19 @@ const SEGUNDO = 1 * 10000;
 let intervaloCronometro = null;
 let tempoInicial = 0;
 let tempoPausado = 0;
-let minutoAtualiolisegundosDecorrido = 0;
+let tempoDecorrido = 0;
 let cronometroRodando = false
+
+$pausar.disabled = true;
 
 function iniciar() {
     if (cronometroRodando) return;
-    /*  parar(); */
+    parar()
     tempoInicial = Date.now();
     startCronometro();
     cronometroRodando = true;
+    $pausar.disabled = false;
+
 }
 
 function startCronometro(TempoDeCorido) {
@@ -30,67 +34,46 @@ function startCronometro(TempoDeCorido) {
         let timeStampNow = Date.now()
         let diferença = timeStampNow - tempoInicial
         $cronometro.textContent = formatarCronometro(milesegundos + diferença)
-    }, 100)
+    }, 10)
 }
 
-function formatarCronometro(milesegundos) {
-    if (milesegundos < 1000) {
-        if (segundosCronometro > 0) {
-            return milesegundos
-        }
-         else{
-            return `00:00.${milesegundos}`
-        } 
+function formatarCronometro(milissegundos) {
+    minutosCronometro = Math.floor(milissegundos / MINUTO);
+    minutosSegundos = Math.floor((milissegundos % MINUTO) / 1000);
+    minutosCentesimos = Math.floor((milissegundos % 1000) / 10);
 
-    } else if (milesegundos < MINUTO) {
-        segundosCronometro = parseInt(segundosCronometro = milesegundos / 1000)
-        centesimosCronometro = milesegundos - (segundosCronometro * 1000)
-        if (minutosCronometro > 0) {
-            return `${(formatarSegundoMinutominutos(segundosCronometro))}.${centesimosCronometro}`
-        } else {
-            return `00:${(formatarSegundoMinutominutos(segundosCronometro))}.${centesimosCronometro}`
-        }
+    let minutosFormatados = minutosCronometro.toString().padStart(2, '0');
+    let segundosFormatados = minutosSegundos.toString().padStart(2, '0');
+    let centesimosFormatados = minutosCentesimos.toString().padStart(2, '0');
 
+    return `${minutosFormatados}:${segundosFormatados}.${centesimosFormatados}`;
+}
+function pausar() {
+    if (cronometroRodando) {
+        clearInterval(intervaloCronometro)
+        tempoPausado = Date.now()
+        tempoDecorrido += (tempoPausado - tempoInicial)
+        cronometroRodando = false
+        $iniciar.disabled = true;
     } else {
-        minutosCronometro = parseInt(minutosCronometro = milesegundos / (MINUTO))
-        return `${formatarSegundoMinutominutos(minutosCronometro)}:${formatarCronometro(milesegundos - minutosCronometro * MINUTO)}`
+        tempoInicial = Date.now()
+        startCronometro(tempoDecorrido)
+        cronometroRodando = true
     }
-}
-function formatarSegundoMinutominutos(segundos_minutos) {
-    return segundos_minutos = segundos_minutos < 10 ? `0${segundos_minutos}` : segundos_minutos
-}
-/*else {
-            var minutos = ms / (MINUTO)
-            minutos = parseInt(minutos)
 
-return `${minutos}:${formataTimeTamp(ms-minutos*MINUTO)}`
-          /*   var segundo = ms / 1000 - (minutos * 60)
-            segundo = parseInt(segundo)
-            var centesimo = ms - (segundo * 1000) - (minutos * MINUTO)
-            return `${minutos}:${segundo}:${centesimo}` 
-        }
-    }
-    function pausar() {
-        if(!$cronometro.value) return;
-        if (rodando) {
-            clearInterval(intervalo)
-            timestampClickPausar = Date.now()
-            msTempoDeCorido += (timestampClickPausar - timestampClickStart)
+}
 
-        } else {
-            timestampClickStart = Date.now()
-            iniciarCronometro(msTempoDeCorido)
-        }
-rodando = !rodando
-    }
-    function parar() {
-        timestampClickStart = 0;
-        timestampClickPausar = 0;
-        msTempoDeCorido = 0
-        rodando = false
-        clearInterval(intervalo)
-        $cronometro.value=""
-    }
- */   $iniciar.addEventListener("click", function () {
-    iniciar()
-})
+function parar() {
+    tempoInicial = 0;
+    tempoPausado = 0;
+    tempoDecorrido = 0;
+    cronometroRodando = false
+    clearInterval(intervaloCronometro)
+    $cronometro.innerHTML = "00:00.00"
+    $iniciar.disabled = false
+}
+
+$iniciar.addEventListener("click", iniciar)
+$pausar.addEventListener("click", pausar)
+$parar.addEventListener("click", parar)
+
