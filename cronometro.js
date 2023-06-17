@@ -1,50 +1,65 @@
-/* (function () {
+let $cronometro = document.querySelector("#horario_cronometro_strong")
+const $iniciar = document.querySelector('#iniciar-cronometro');
+const $pausar = document.querySelector('#pausar-cronometro');
+const $parar = document.querySelector('#parar-cronometro');
 
-    var $cronometro = document.querySelector('#cronometro');
-    var $iniciar = document.querySelector('#iniciar');
-    var $pausar = document.querySelector('#pausar');
-    var $parar = document.querySelector('#parar');
+let minutosCronometro
+let segundosCronometro
+let centesimosCronometro
 
-    $iniciar.addEventListener("click", iniciar);
-    $pausar.addEventListener("click", pausar);
-    $parar.addEventListener("click", parar);
+const MINUTO = 60 * 1000;
+const SEGUNDO = 1 * 10000;
 
-    var intervalo = null
-    var timestampClickStart = 0;
-    var timestampClickPausar = 0;
-    var msTempoDeCorido = 0
-    var rodando = false
+let intervaloCronometro = null;
+let tempoInicial = 0;
+let tempoPausado = 0;
+let minutoAtualiolisegundosDecorrido = 0;
+let cronometroRodando = false
 
+function iniciar() {
+    if (cronometroRodando) return;
+    /*  parar(); */
+    tempoInicial = Date.now();
+    startCronometro();
+    cronometroRodando = true;
+}
 
-    function iniciar() {
-        if(rodando) return;
-        parar();
-        timestampClickStart = Date.now();
-        iniciarCronometro();
-        rodando = true;
-    }
+function startCronometro(TempoDeCorido) {
+    let milesegundos = TempoDeCorido || 0
+    intervaloCronometro = setInterval(function () {
+        let timeStampNow = Date.now()
+        let diferença = timeStampNow - tempoInicial
+        $cronometro.textContent = formatarCronometro(milesegundos + diferença)
+    }, 100)
+}
 
-    function iniciarCronometro(TempoDeCorido) {
-        var _ms = TempoDeCorido || 0
-        intervalo = setInterval(function () {
-            var timeStampNow = Date.now()
-            var diferença = timeStampNow - timestampClickStart
-            $cronometro.value = formataTimeTamp(diferença + _ms)
-        }, 100)
-    }
+function formatarCronometro(milesegundos) {
+    if (milesegundos < 1000) {
+        if (segundosCronometro > 0) {
+            return milesegundos
+        }
+         else{
+            return `00:00.${milesegundos}`
+        } 
 
-    const MINUTO = 60*1000
-    const SEGUNDO = 1*10000
-
-    function formataTimeTamp(ms) {
-        if (ms < 1000) {
-            return ms
-        } else if (ms < MINUTO) {
-            var segundo = ms / 1000
-            segundo = parseInt(segundo)
-            var centesimo = ms - (segundo * 1000)
-            return `${segundo}:${centesimo}`
+    } else if (milesegundos < MINUTO) {
+        segundosCronometro = parseInt(segundosCronometro = milesegundos / 1000)
+        centesimosCronometro = milesegundos - (segundosCronometro * 1000)
+        if (minutosCronometro > 0) {
+            return `${(formatarSegundoMinutominutos(segundosCronometro))}.${centesimosCronometro}`
         } else {
+            return `00:${(formatarSegundoMinutominutos(segundosCronometro))}.${centesimosCronometro}`
+        }
+
+    } else {
+        minutosCronometro = parseInt(minutosCronometro = milesegundos / (MINUTO))
+        return `${formatarSegundoMinutominutos(minutosCronometro)}:${formatarCronometro(milesegundos - minutosCronometro * MINUTO)}`
+    }
+}
+function formatarSegundoMinutominutos(segundos_minutos) {
+    return segundos_minutos = segundos_minutos < 10 ? `0${segundos_minutos}` : segundos_minutos
+}
+/*else {
             var minutos = ms / (MINUTO)
             minutos = parseInt(minutos)
 
@@ -76,4 +91,6 @@ rodando = !rodando
         clearInterval(intervalo)
         $cronometro.value=""
     }
- */
+ */   $iniciar.addEventListener("click", function () {
+    iniciar()
+})
