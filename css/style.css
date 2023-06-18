@@ -2,22 +2,24 @@
     box-sizing: border-box;
     font-family: 'Barlow Condensed', sans-serif;
     font-family: 'Orbitron', sans-serif;
-      color: white;
+    color: white;
 }
 
-body{
+body {
     background-color: #000000;
     -webkit-stroke-color: #fff;
-display: flex;
-align-items: center;
-justify-content: center;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
 }
 
 .botoes {
     display: inline-block;
-    margin: 0 auto; 
+    margin: 1em auto;
     padding: 0.625em 1.25em;
-    background-color:transparent;
+    background-color: transparent;
     border: none;
     text-align: center;
     text-decoration: none;
@@ -26,25 +28,30 @@ justify-content: center;
     border-radius: 10%;
     transition: all .3s ease-in;
 }
-.botoes:hover i, .botoes:hover {
-    border-color: white ;
+
+.botoes:hover i,
+.botoes:hover {
+    border-color: white;
     color: white;
 }
-.fa-solid{
+
+.fa-solid {
     color: #950101;
     font-size: 2em;
     transition: all .3s ease-in;
 }
 
-.section_all{
-align-items: center;
-text-align: center;
-justify-content: center;
-margin: 2.5em auto;
-padding: 1em 0;
+.section_all {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto 1.5em;
+    padding: 1em 0;
+    width: 99%;
 
 }
-.dados_relogio_numeros{
+
+.dados_relogio_numeros {
     color: #ff0000;
     -webkit-stroke-color: #fff;
     text-decoration: none;
@@ -52,12 +59,47 @@ padding: 1em 0;
     display: block;
     padding-bottom: .3em
 }
-.dados_relogio_data{
-    font-size: 1em; 
+
+.dados_relogio_data {
+    font-size: 1em;
     color: #dd0000;
 }
-select{
-    width: 17em;
+
+#select-fuso-horarios {
+    margin: 1em auto;
+    width: 18em;
     background-color: black;
-    font-size: 1em;
+    font-size: .9em;
+    z-index: 1; /* Adicione esta linha */
+}
+
+
+footer {
+    bottom: 0.0625em;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+@media (min-width: 1040px) {
+    #main {
+        display: block;
+        overflow: auto;
+    }
+
+    .section_all {
+        width: 32.333333333333%;
+        float: left;
+        margin: 17em .5%;
+
+    }
+    #select-fuso-horarios {
+        display: block; 
+    }
+
+    footer {
+        bottom: 1em;
+        position: fixed;
+    }
 }
