@@ -166,6 +166,6 @@ function mostraFuso() {
 
     $horarioFusoStrong.innerHTML = `${horaAtual}:${minutoAtual}:${segundoAtual}`;
     $dataFusoStrong.innerHTML = `${diaDaSemanaAtual} - ${diaAtual}/${mesAtual}/${anoAtual}`;
-} 
+}
 mostraFuso()
 setInterval(function () { mostraFuso() }, 1000)
