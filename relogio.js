@@ -1,3 +1,4 @@
+/* RELOGIO */
 var $horarioRelogioStrong = document.querySelector("#horario_relogio_strong")
 var $dataRelogioStrong = document.querySelector("#data_relogio_strong")
 
@@ -49,9 +50,10 @@ function formatarDiaDaSeamana(dia_da_semana) {
 }
 mostraHorarioAtual()
 mostraDataAtual()
+
 setInterval(function () { mostraHorarioAtual() }, 1000)
 setInterval(function () { mostraDataAtual() }, 1000)
-
+/* RELOGIO */
 /* CRONOMETRO */
 let $cronometro = document.querySelector("#horario_cronometro_strong")
 const $iniciar = document.querySelector('#iniciar-cronometro');
@@ -131,7 +133,7 @@ function parar() {
 $iniciar.addEventListener("click", iniciar)
 $pausar.addEventListener("click", pausar)
 $parar.addEventListener("click", parar)
-
+/* CRONOMETRO */
 /* FUSO HORARIO */
 var $horarioFusoStrong = document.querySelector("#horario_fuso_strong")
 var $dataFusoStrong = document.querySelector("#data_fuso_strong")
@@ -169,3 +171,4 @@ function mostraFuso() {
 }
 mostraFuso()
 setInterval(function () { mostraFuso() }, 1000)
+/* FUSO HORARIO */
