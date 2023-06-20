@@ -1,16 +1,16 @@
 /* RELOGIO */
-var $horarioRelogioStrong = document.querySelector("#horario_relogio_strong")
-var $dataRelogioStrong = document.querySelector("#data_relogio_strong")
+let $horarioRelogioStrong = document.querySelector("#horario_relogio_strong")
+let $dataRelogioStrong = document.querySelector("#data_relogio_strong")
 
-var tempoAtual
-var horaAtual;
-var minutoAtual;
-var segundoAtual;
+let tempoAtual
+let horaAtual;
+let minutoAtual;
+let segundoAtual;
 
-var diaDaSemanaAtual
-var diaAtual;
-var mesAtual;
-var anoAtual;
+let diaDaSemanaAtual
+let diaAtual;
+let mesAtual;
+let anoAtual;
 
 function mostraHorarioAtual() {
     tempoAtual = new Date();
@@ -135,29 +135,31 @@ $pausar.addEventListener("click", pausar)
 $parar.addEventListener("click", parar)
 /* CRONOMETRO */
 /* FUSO HORARIO */
-var $horarioFusoStrong = document.querySelector("#horario_fuso_strong")
-var $dataFusoStrong = document.querySelector("#data_fuso_strong")
-var $select = document.querySelector("#select-fuso-horarios")
-
-
+let $horarioFusoStrong = document.querySelector("#horario_fuso_strong")
+let $dataFusoStrong = document.querySelector("#data_fuso_strong")
+let $select = document.querySelector("#select-fuso-horarios")
+let $valores = $select.options[$select.selectedIndex].className
 
 function mostraFuso() {
     tempoAtual = new Date();
 
-    horaAtual = formatarValores(tempoAtual.getUTCHours() + 0)
+    horaAtual = formatarValores(tempoAtual.getUTCHours())
     minutoAtual = formatarValores(tempoAtual.getMinutes())
     segundoAtual = formatarValores(tempoAtual.getSeconds())
 
-
-    horaAtual = formatarValores(tempoAtual.getUTCHours() + parseInt($select.value))
-
-    if (horaAtual < 0) {
-        horaAtual += 24;
-        tempoAtual.setDate(tempoAtual.getDate() - 1);
-    } else if (horaAtual >= 24) {
-        horaAtual -= 24;
-        tempoAtual.setDate(tempoAtual.getDate() + 1);
+    let fusoHorario = parseInt($select.value);
+    let novaHora = tempoAtual.getUTCHours() + fusoHorario;
+    
+    if (novaHora < 0) {
+      horaAtual = formatarValores(novaHora + 24);
+      tempoAtual.setDate(tempoAtual.getDate() - 1);
+    } else if (novaHora >= 24) {
+      horaAtual = formatarValores(novaHora - 24);
+      tempoAtual.setDate(tempoAtual.getDate() + 1);
+    } else {
+      horaAtual = formatarValores(novaHora);
     }
+    
     minutoAtual = formatarValores(tempoAtual.getMinutes());
     segundoAtual = formatarValores(tempoAtual.getSeconds());
 
@@ -172,3 +174,4 @@ function mostraFuso() {
 mostraFuso()
 setInterval(function () { mostraFuso() }, 1000)
 /* FUSO HORARIO */
+
