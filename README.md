@@ -1,6 +1,6 @@
 ![RelogioJavascript](https://github.com/kauannlima/conversor_de_medidas/assets/124539523/120efb79-8964-4c98-83f0-521fea407204)
 <h1 align="center">
- Calculadora Javascript 🧮
+ Relogio Javascript 🧮
 </h1>
 
 
